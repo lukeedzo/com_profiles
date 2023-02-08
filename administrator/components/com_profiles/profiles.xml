@@ -47,7 +47,7 @@
         <menu>COM_PROFILES</menu>
         <submenu>
             
-			<menu link="option=com_profiles&amp;view=profiles" view="profiles" alt="Profiles/Profiles">COM_PROFILES_TITLE_PROFILES</menu>
+				<menu link="option=com_profiles&amp;view=profiles" view="profiles" alt="Profiles/Profiles">COM_PROFILES_TITLE_PROFILES</menu>
 
         </submenu>
         <files folder="administrator">
@@ -70,6 +70,14 @@
 			<language tag="en-GB">en-GB/en-GB.com_profiles.sys.ini</language>
         </languages>
     </administration>
+		<update> 
+		<schemas> 
+			<schemapath type="mysql">/administrator/components/com_profiles/sql/updates/mysql</schemapath> 
+		</schemas> 
+		</update>
+		 <updateservers>
+			<server type="extension" priority="1" name="Study programs">https://plycneris.com/updates/joomla/com_profiles/updates.xml</server>
+		</updateservers>
     <config>
         <fields name="params">
             <fieldset name="component">

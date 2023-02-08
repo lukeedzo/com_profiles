@@ -1,0 +1,40 @@
+{
+	"name": "com-studies-build-tools",
+	"description": "com_studies build tools",
+	"version": "1.0.0",
+	"author": "Lukas Plycneris",
+	"main": "index.js",
+	"scripts": {
+		"dev": "gulp dev",
+		"build-package": "gulp build-package",
+		"build": "gulp build",
+		"lint": "gulp lint"
+	},
+	"dependencies": {
+		"gulp": "^4.0.2",
+		"gulp-babel": "^8.0.0",
+		"gulp-clean": "^0.4.0",
+		"gulp-clean-css": "^4.3.0",
+		"gulp-sass": "^5.1.0",
+		"gulp-string-replace": "^1.1.2",
+		"gulp-uglify": "^3.0.2",
+		"gulp-zip": "^5.1.0",
+		"gulp4-run-sequence": "^1.0.1",
+		"path": "^0.12.7",
+		"require-dir": "^1.2.0",
+		"sass": "^1.55.0",
+		"tippy.js": "^6.3.7",
+		"webpack-stream": "^7.0.0"
+	},
+	"engines": {
+		"node": ">=10.0.0"
+	},
+	"devDependencies": {
+		"@babel/core": "^7.19.3",
+		"@babel/plugin-transform-arrow-functions": "^7.18.6",
+		"@babel/plugin-transform-block-scoping": "^7.19.4",
+		"@babel/plugin-transform-classes": "^7.19.0",
+		"@babel/preset-env": "^7.19.4",
+		"babel-loader": "^8.2.2"
+	}
+}
