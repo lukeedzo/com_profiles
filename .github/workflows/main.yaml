@@ -1,0 +1,35 @@
+on: 
+  push:
+   branches:
+      - '*'
+      - '!dev'
+name: 🚀 Build and deploy joomla componenet
+jobs:
+  web-deploy:
+    name: 🎉 Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🚚 Get latest code
+        uses: actions/checkout@v2
+
+      - name: Use Node.js 16
+        uses: actions/setup-node@v2
+        with:
+          node-version: '16'
+
+      - name: 🔨 Build Componenet
+        run: |
+          npm install
+          npm run build-package
+        working-directory: ./components/com_profiles/build/  
+      - name: List output files
+        run: find ./components/com_profiles/build/pkg/ -print
+
+      - name: 📂 Sync componenet files
+        uses: SamKirkland/FTP-Deploy-Action@4.2.0
+        with:
+          server: ${{ secrets.SERVER_NAME }}
+          username: ${{ secrets.SERVER_USER }}
+          password: ${{ secrets.SERVER_PASS }}
+          local-dir: ./components/com_profiles/build/package/
+          server-dir: public_html/components/com_profiles/
