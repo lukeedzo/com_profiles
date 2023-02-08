@@ -32,7 +32,7 @@ module.exports = {
     script_file_dest: './pkg/',
     profiles_file_src:
       './../../../../administrator/components/com_profiles/studies.xml',
-    prfiles_file_dest: './pkg/',
+    profiles_file_dest: './pkg/',
 
     installer_src:
       './../../../../administrator/components/com_profiles/installer/**/*.*',

@@ -3,7 +3,7 @@ on:
    branches:
       - '*'
       - '!dev'
-name: 🚀 Build and deploy joomla componenet
+name: 🚀 Build and deploy joomla component
 jobs:
   web-deploy:
     name: 🎉 Deploy
@@ -17,7 +17,7 @@ jobs:
         with:
           node-version: '16'
 
-      - name: 🔨 Build Componenet
+      - name: 🔨 Build Component
         run: |
           npm install
           npm run build-package
@@ -25,7 +25,7 @@ jobs:
       - name: List output files
         run: find ./components/com_profiles/build/pkg/ -print
 
-      - name: 📂 Sync componenet files
+      - name: 📂 Sync Component files
         uses: SamKirkland/FTP-Deploy-Action@4.2.0
         with:
           server: ${{ secrets.SERVER_NAME }}
