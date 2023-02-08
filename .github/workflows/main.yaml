@@ -32,4 +32,4 @@ jobs:
           username: ${{ secrets.SERVER_USER }}
           password: ${{ secrets.SERVER_PASS }}
           local-dir: ./components/com_profiles/build/package/
-          server-dir: public_html/components/com_profiles/
+          server-dir: public_html/updates/joomla/com_profiles/
