@@ -27,13 +27,6 @@ module.exports = {
     site_src: './.././**/*.*',
     site_dest: './pkg/site/',
 
-    script_file_src:
-      './../../../../administrator/components/com_profiles/script.php',
-    script_file_dest: './pkg/',
-    profiles_file_src:
-      './../../../../administrator/components/com_profiles/studies.xml',
-    profiles_file_dest: './pkg/',
-
     installer_src:
       './../../../../administrator/components/com_profiles/installer/**/*.*',
     installer_dest: './pkg/installer/',
@@ -44,9 +37,9 @@ module.exports = {
     script_file_src:
       './../../../../administrator/components/com_profiles/script.php',
     script_file_dest: './pkg/',
-    studies_file_src:
-      './../../../../administrator/components/com_profiles/studies.xml',
-    studies_file_dest: './pkg/',
+    profiles_file_src:
+      './../../../../administrator/components/com_profiles/profiles.xml',
+    profiles_file_dest: './pkg/',
 
     plugins_src: './../../../../plugins/search/studies/**/*.*',
     plugins_dest: './pkg/plugins/search/studies/',
