@@ -27,6 +27,13 @@ module.exports = {
     site_src: './.././**/*.*',
     site_dest: './pkg/site/',
 
+    script_file_src:
+      './../../../../administrator/components/com_profiles/script.php',
+    script_file_dest: './pkg/',
+    profiles_file_src:
+      './../../../../administrator/components/com_profiles/studies.xml',
+    prfiles_file_dest: './pkg/',
+
     installer_src:
       './../../../../administrator/components/com_profiles/installer/**/*.*',
     installer_dest: './pkg/installer/',
