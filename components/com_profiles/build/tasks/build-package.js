@@ -62,10 +62,10 @@ run.task('installer-script', () => {
   return run
     .src([
       path.join(__dirname, config.package.script_file_src),
-      path.join(__dirname, config.package.studies_file_src),
+      path.join(__dirname, config.package.profiles_file_src),
     ])
     .pipe(replace(/CVS(.{7})/g, `CVS: ${config.version}`))
-    .pipe(run.dest(config.package.studies_file_dest));
+    .pipe(run.dest(config.package.profiles_file_dest));
 });
 
 run.task('indexhtml-file', () => {
