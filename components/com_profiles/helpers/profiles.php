@@ -85,4 +85,118 @@ class ProfilesHelpersProfiles
 
         return $permission;
     }
+
+    /**
+     * Method transfer array of std objects to array of arrays.
+     *
+     * @param array  $data data.
+     *
+     * @return array data
+     */
+    public function decode($data)
+    {
+        return json_decode(json_encode($data), true);
+    }
+
+    /**
+     * Method Grouping items by alphabet
+     *
+     * @param array   $data data.
+     *
+     * @return array  groupetd array.
+     */
+    public function grouping($items)
+    {
+        $grouped = array();
+        foreach ($items as $item) {
+            $grouped[$item->letter]['letter'] = $item->letter;
+
+            $grouped[$item->letter]['items'][] = $item;
+        }
+
+        return $grouped;
+
+    }
+
+    /**
+     * Method decoding Positions fields.
+     *
+     * @param object   $data fields object.
+     *
+     * @return object
+     */
+    public function decodePositions($data)
+    {
+        $decode = json_decode($data, true);
+        $items = array();
+        foreach ($decode as $item) {
+            $items[] = (object) [
+                'position' => $item['position'],
+            ];
+        }
+
+        return $items;
+    }
+
+    /**
+     * Method decoding Publications fields.
+     *
+     * @param object   $data fields object.
+     *
+     * @return object
+     */
+    public function decodePublications($data)
+    {
+        $decode = json_decode($data, true);
+        $items = array();
+        foreach ($decode as $item) {
+            $items[] = (object) [
+                'publication' => $item['publication'],
+                'publication_url' => $item['publication_url'],
+            ];
+        }
+
+        return $items;
+    }
+
+    /**
+     * Method decoding Profiles fields.
+     *
+     * @param object   $data fields object.
+     *
+     * @return object
+     */
+    public function decodeProfiles($data)
+    {
+        $decode = json_decode($data, true);
+        $items = array();
+        foreach ($decode as $item) {
+            $items[] = (object) [
+                'profile' => $item['profile'],
+                'profile_url' => $item['profile_url'],
+            ];
+        }
+
+        return $items;
+    }
+
+    public function lastStrong($string)
+    {
+        $last_word = strrchr($string, ' ');
+        $bold_last_word = " <strong>" . trim($last_word) . "</strong>";
+        return str_replace($last_word, $bold_last_word, $string);
+    }
+
+    public function strongFirst($string)
+    {
+        $items = explode(",", $string);
+        $bolded_items = array();
+        $bolded_items[] = "<strong>" . trim($items[0]) . "</strong>";
+        for ($i = 1; $i < count($items); $i++) {
+            $bolded_items[] = trim($items[$i]);
+        }
+
+        return implode(", ", $bolded_items);
+    }
+
 }

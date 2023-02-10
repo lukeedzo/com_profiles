@@ -1,0 +1,5 @@
+<form>
+	<fieldset>
+		<field name="position" type="text" label="Position" />
+	</fieldset>
+</form>

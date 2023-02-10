@@ -36,14 +36,13 @@ $canOrder  = $user->authorise('core.edit.state', 'com_profiles');
 
 
 
-if ($saveOrder)
-{
-	$saveOrderingUrl = 'index.php?option=com_profiles&task=profiles.saveOrderAjax&tmpl=component';
-    HTMLHelper::_('sortablelist.sortable', 'profileList', 'adminForm', strtolower($listDirn), $saveOrderingUrl);
-}
+// if ($saveOrder)
+// {
+// 	$saveOrderingUrl = 'index.php?option=com_profiles&task=profiles.saveOrderAjax&tmpl=component';
+//     HTMLHelper::_('sortablelist.sortable', 'profileList', 'adminForm', strtolower($listDirn), $saveOrderingUrl);
+// }
 
-$sortFields = $this->getSortFields();
-?>
+$sortFields = $this->getSortFields(); ?>
 
 <form action="<?php echo Route::_('index.php?option=com_profiles&view=profiles'); ?>" method="post"
 	  name="adminForm" id="adminForm">
@@ -55,9 +54,7 @@ $sortFields = $this->getSortFields();
 		<?php else : ?>
 		<div id="j-main-container">
 			<?php endif; ?>
-
 			<?php echo LayoutHelper::render('joomla.searchtools.default', array('view' => $this)); ?>
-
 			<div class="clearfix"></div>
 			<table class="table table-striped" id="profileList">
 				<thead>
@@ -65,9 +62,9 @@ $sortFields = $this->getSortFields();
 					<th width="1%" >
 						<input type="checkbox" name="checkall-toggle" value="" title="<?php echo Text::_('JGLOBAL_CHECK_ALL'); ?>" onclick="Joomla.checkAll(this)"/>
 					</th>
-					
-					
-					
+					<th width="1%" class="nowrap center">
+						<?php echo JHtml::_('searchtools.sort', 'JSTATUS', 'a.state', $listDirn, $listOrder); ?>
+					</th>
 					<th class='nowrap'>
 						<?php echo JHtml::_('searchtools.sort',  'COM_PROFILES_PROFILES_NAME', 'a.name', $listDirn, $listOrder); ?>
 					</th>
@@ -77,16 +74,6 @@ $sortFields = $this->getSortFields();
 					<th class='nowrap'>
 						<?php echo JHtml::_('searchtools.sort',  'COM_PROFILES_PROFILES_DEGREE', 'a.degree', $listDirn, $listOrder); ?>
 					</th>
-					<th class='nowrap'>
-						<?php echo JHtml::_('searchtools.sort',  'COM_PROFILES_PROFILES_POSITIONS', 'a.positions', $listDirn, $listOrder); ?>
-					</th>
-					<th class='nowrap'>
-						<?php echo JHtml::_('searchtools.sort',  'COM_PROFILES_PROFILES_PUBLICATION_LIST', 'a.publication_list', $listDirn, $listOrder); ?>
-					</th>
-					<th class='nowrap'>
-						<?php echo JHtml::_('searchtools.sort',  'COM_PROFILES_PROFILES_EXTERNAL_PROFILES', 'a.external_profiles', $listDirn, $listOrder); ?>
-					</th>
-					
 				</tr>
 				</thead>
 				<tfoot>
@@ -108,9 +95,16 @@ $sortFields = $this->getSortFields();
 						<td class="text-center">
 							<?php echo HTMLHelper::_('grid.id', $i, $item->id); ?>
 						</td>
-						
-						
-						
+							<td>
+							<div class="btn-group">
+								<?php echo HTMLHelper::_('jgrid.published', $item->state, $i, 'profiles.', $canChange, 'cb'); ?>
+								<?php if ($canChange) : ?>
+									<?php  HTMLHelper::_('actionsdropdown.' . ((int) $item->state === 2 ? 'un' : '') . 'archive', 'cb' . $i, 'profiles'); ?>
+									<?php HTMLHelper::_('actionsdropdown.' . ((int) $item->state === -2 ? 'un' : '') . 'trash', 'cb' . $i, 'profiles'); ?>
+									<?php echo HTMLHelper::_('actionsdropdown.render', $this->escape($item->state)); ?>
+								<?php endif; ?>
+							</div>
+							</td>
 						<td class="">
 							<?php if (isset($item->checked_out) && $item->checked_out && ($canEdit || $canChange)) : ?>
 								<?php echo JHtml::_('jgrid.checkedout', $i, $item->uEditor, $item->checked_out_time, 'profiles.', $canCheckin); ?>
@@ -129,76 +123,6 @@ $sortFields = $this->getSortFields();
 						<td class="">
 							<?php echo $item->degree; ?>
 						</td>
-						<td class="">
-								<?php if (!empty($item->positions)) :
-								$subform_elements = json_decode($item->positions);
-						foreach($subform_elements as $element)
-						{
-							foreach($element as $key =>$value)
-							{
-								echo '</br>'; 
-								if(is_array($value))
-								{
-								echo $key.':&nbsp';
-								foreach($value as $key => $val)
-								{
-									echo '&nbsp'.$val.'&nbsp&nbsp&nbsp';
-								}
-								}else
-								{
-								echo $key .':&nbsp'.$value.'&nbsp&nbsp&nbsp';
-								}
-							}
-						} 
-								endif; ?>
-						</td>
-						<td class="">
-								<?php if (!empty($item->publication_list)) :
-								$subform_elements = json_decode($item->publication_list);
-						foreach($subform_elements as $element)
-						{
-							foreach($element as $key =>$value)
-							{
-								echo '</br>'; 
-								if(is_array($value))
-								{
-								echo $key.':&nbsp';
-								foreach($value as $key => $val)
-								{
-									echo '&nbsp'.$val.'&nbsp&nbsp&nbsp';
-								}
-								}else
-								{
-								echo $key .':&nbsp'.$value.'&nbsp&nbsp&nbsp';
-								}
-							}
-						} 
-								endif; ?>
-						</td>
-						<td class="">
-								<?php if (!empty($item->external_profiles)) :
-								$subform_elements = json_decode($item->external_profiles);
-						foreach($subform_elements as $element)
-						{
-							foreach($element as $key =>$value)
-							{
-								echo '</br>'; 
-								if(is_array($value))
-								{
-								echo $key.':&nbsp';
-								foreach($value as $key => $val)
-								{
-									echo '&nbsp'.$val.'&nbsp&nbsp&nbsp';
-								}
-								}else
-								{
-								echo $key .':&nbsp'.$value.'&nbsp&nbsp&nbsp';
-								}
-							}
-						} 
-								endif; ?>
-						</td>
-						
 					</tr>
 				<?php endforeach; ?>
 				</tbody>

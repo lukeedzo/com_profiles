@@ -1,0 +1,6 @@
+<form>
+	<fieldset>
+		<field name="profile" type="text" label="Profile" description=""  />
+		<field name="profile_url" label="Profile url" type="text"/>
+	</fieldset>
+</form>

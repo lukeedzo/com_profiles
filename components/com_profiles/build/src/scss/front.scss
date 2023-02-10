@@ -4,3 +4,36 @@
  * @author     Lukas Plycneris <lukasplycneris@protonmail.com>
  * @copyright  2023 Lukas Plycneris
  */
+
+.profiles {
+  &__search {
+    .js-stools .js-stools-container-bar {
+      display: flex;
+    }
+    .js-stools .btn-wrapper {
+      display: flex;
+    }
+  }
+  &__list {
+    margin-top: 50px;
+  }
+  &__letter {
+    color: #666666;
+    font-weight: bold;
+    font-size: 24pt;
+    margin-bottom: 10px;
+  }
+
+  &__position {
+    margin-bottom: 10px;
+  }
+
+  &__profile-item {
+    margin-bottom: 10px;
+  }
+  &__pagination {
+    margin-top: 50px;
+    justify-content: center;
+    display: flex;
+  }
+}

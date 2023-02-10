@@ -15,6 +15,8 @@ jimport('joomla.application.component.view');
 use \Joomla\CMS\Factory;
 use \Joomla\CMS\Language\Text;
 
+JLoader::register('ProfilesControllerProfiles', JPATH_COMPONENT . '/controllers/profiles.php');
+JLoader::register('ProfilesHelpersProfiles', JPATH_COMPONENT . '/helpers/profiles.php');
 /**
  * View class for a list of Profiles.
  *
@@ -31,6 +33,8 @@ class ProfilesViewProfiles extends \Joomla\CMS\MVC\View\HtmlView
 
     protected $params;
 
+    protected $helper;
+
     /**
      * Display the view
      *
@@ -43,11 +47,14 @@ class ProfilesViewProfiles extends \Joomla\CMS\MVC\View\HtmlView
     public function display($tpl = null)
     {
         $app = Factory::getApplication();
-
+        $controller = new ProfilesControllerProfiles();
         $this->state = $this->get('State');
-        $this->items = $this->get('Items');
+        $this->helper = new ProfilesHelpersProfiles();
+        $this->items = $controller->getItems();
         $this->pagination = $this->get('Pagination');
         $this->params = $this->state->get('params');
+        $this->filterForm = $this->get('FilterForm');
+        $this->activeFilters = $this->get('ActiveFilters');
 
         // Check for errors.
         if (count($errors = $this->get('Errors'))) {

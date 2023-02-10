@@ -69,7 +69,6 @@ class ProfilesModelProfiles extends \Joomla\CMS\MVC\Model\ListModel
 
         JLoader::register('FieldsHelper', JPATH_ADMINISTRATOR . '/components/com_fields/helpers/fields.php');
         // Split context into component and optional section
-        // Split context into component and optional section
         if (!empty($context)) {
             $parts = FieldsHelper::extract($context);
 
@@ -153,7 +152,7 @@ class ProfilesModelProfiles extends \Joomla\CMS\MVC\Model\ListModel
                 $query->where('a.id = ' . (int) substr($search, 3));
             } else {
                 $search = $db->Quote('%' . $db->escape($search, true) . '%');
-
+                $query->where('( a.name LIKE ' . $search . ' )');
             }
         }
 
@@ -164,8 +163,6 @@ class ProfilesModelProfiles extends \Joomla\CMS\MVC\Model\ListModel
         if ($orderCol && $orderDirn) {
             $query->order($db->escape($orderCol . ' ' . $orderDirn));
         }
-
-        //XXX_CUSTOM_ORDER_FOR_NESTED
 
         return $query;
     }
