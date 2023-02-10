@@ -1,0 +1,6 @@
+<form>
+	<fieldset>
+		<field name="publication" type="text" label="Publications" />
+		<field name="publication_url" type="text" label="Publications url" />
+	</fieldset>
+</form>
