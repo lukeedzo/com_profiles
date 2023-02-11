@@ -41,20 +41,20 @@ class ProfilesControllerProfiles extends ProfilesController
         $helper = new ProfilesHelpersProfiles();
         $data = $helper->decode($this->getModel());
 
-        $items = array();
+        $items = [];
         foreach ($data as $item) {
-            $items[] = (object) [
-                'letter' => mb_substr($item['name'], 0, 1),
+            $decodedItem = [
                 'name' => $item['name'],
-                'degree' => $item['degree'],
-                'positions' => $helper->decodePositions($item['positions']),
                 'e_mail' => $item['e_mail'],
+                'degree' => $item['degree'],
+                'letter' => mb_substr($item['name'], 0, 1),
+                'positions' => $helper->decodePositions($item['positions']),
                 'publication_list' => $helper->decodePublications($item['publication_list']),
                 'external_profiles' => $helper->decodeProfiles($item['external_profiles']),
             ];
+            $items[] = (object) $decodedItem;
         }
 
-        // $decode = $helper->decode($items);
         $grouped = $helper->grouping($items);
 
         return $grouped;

@@ -28,7 +28,6 @@ JLoader::register('ProfilesHelper', JPATH_COMPONENT_ADMINISTRATOR . DIRECTORY_SE
 JLoader::register('Importer', JPATH_COMPONENT_ADMINISTRATOR . DIRECTORY_SEPARATOR . 'models' . DIRECTORY_SEPARATOR . 'Importer.php');
 
 // $importer = new Importer();
-
 // $importer->xlsxImport();
 
 $controller = BaseController::getInstance('Profiles');

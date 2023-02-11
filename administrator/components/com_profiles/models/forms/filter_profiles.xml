@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <form>
     <fields name="filter">
-        <field name="search" type="text" description="COM_PROFILES_SEARCH_FILTER_SUBMIT"
+        <field name="search" 
+               type="text" 
+               description="COM_PROFILES_SEARCH_FILTER_SUBMIT"
                label="COM_USERS_FILTER_SEARCH_DESC"
                class="js-stools-search-string" />
         <field name="state"
@@ -20,14 +22,25 @@
                onchange="this.form.submit();"
                default="a.id DESC">
             <option value="">JGLOBAL_SORT_BY</option>
-            <option value="a.name ASC">COM_PROFILES_NAME_ASC</option><option value="a.name DESC">COM_PROFILES_NAME_DESC</option><option value="a.degree ASC">COM_PROFILES_DEGREE_ASC</option><option value="a.degree DESC">COM_PROFILES_DEGREE_DESC</option><option value="a.positions ASC">COM_PROFILES_POSITIONS_ASC</option><option value="a.positions DESC">COM_PROFILES_POSITIONS_DESC</option><option value="a.e_mail ASC">COM_PROFILES_E_MAIL_ASC</option><option value="a.e_mail DESC">COM_PROFILES_E_MAIL_DESC</option><option value="a.publication_list ASC">COM_PROFILES_PUBLICATION_LIST_ASC</option><option value="a.publication_list DESC">COM_PROFILES_PUBLICATION_LIST_DESC</option><option value="a.external_profiles ASC">COM_PROFILES_EXTERNAL_PROFILES_ASC</option><option value="a.external_profiles DESC">COM_PROFILES_EXTERNAL_PROFILES_DESC</option>
+            <option value="a.name ASC">COM_PROFILES_NAME_ASC</option>
+            <option value="a.name DESC">COM_PROFILES_NAME_DESC</option>
+            <option value="a.degree ASC">COM_PROFILES_DEGREE_ASC</option>
+            <option value="a.degree DESC">COM_PROFILES_DEGREE_DESC</option>
+            <option value="a.positions ASC">COM_PROFILES_POSITIONS_ASC</option>
+            <option value="a.positions DESC">COM_PROFILES_POSITIONS_DESC</option>
+            <option value="a.e_mail ASC">COM_PROFILES_E_MAIL_ASC</option>
+            <option value="a.e_mail DESC">COM_PROFILES_E_MAIL_DESC</option>
+            <option value="a.publication_list ASC">COM_PROFILES_PUBLICATION_LIST_ASC</option>
+            <option value="a.publication_list DESC">COM_PROFILES_PUBLICATION_LIST_DESC</option>
+            <option value="a.external_profiles ASC">COM_PROFILES_EXTERNAL_PROFILES_ASC</option>
+            <option value="a.external_profiles DESC">COM_PROFILES_EXTERNAL_PROFILES_DESC</option>
         </field>
-				<field name="limit"
-								type="limitbox"
-								label="COM_PROFILES_LIST_LIMIT"
-								description="COM_PROFILES_LIST_LIMIT_DESC"
-								class="input-mini"
-								default="25"
-								onchange="this.form.submit();" />
+        <field name="limit"
+               type="limitbox"
+               label="COM_PROFILES_LIST_LIMIT"
+               description="COM_PROFILES_LIST_LIMIT_DESC"
+               class="input-mini"
+               default="25"
+               onchange="this.form.submit();" />
     </fields>
 </form>
