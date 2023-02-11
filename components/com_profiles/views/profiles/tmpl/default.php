@@ -36,7 +36,8 @@ $document->addStyleSheet(Uri::root() . 'media/com_profiles/css/front.css');?>
     <h4 class="profiles__letter"><?php echo $item['letter'] ?></h4>
     <?php foreach ($item['items'] as $profile): ?>
       <?php echo '{slider open="false" title="' . $this->helper->lastStrong($profile->name) . ', ' . $profile->degree . '"}'; ?>
-      <div class="profiles__positions">
+			<?php if(!empty($profile->positions)): ?>
+			<div class="profiles__positions">
         <?php foreach ($profile->positions as $position): ?>
           <div class="profiles__position">
             <?php echo $this->helper->strongFirst($position->position) ?>
@@ -44,11 +45,15 @@ $document->addStyleSheet(Uri::root() . 'media/com_profiles/css/front.css');?>
         <?php endforeach;?>
         <hr>
       </div>
+			<?php endif ?>
       <div class="profiles__profile">
         <div class="profiles__profile-items">
+					<?php if(!empty($profile->e_mail)):  ?>
           <div class="profiles__profile-item">
             <strong>E-mail: </strong><a href="mailto: <?php echo $profile->e_mail ?>"><?php echo $profile->e_mail ?></a>
           </div>
+					<?php endif ?>
+					<?php if(!empty($profile->publication_list)):  ?>
           <div class="profiles__profile-item">
 					<?php $i = 0; $len = count($profile->publication_list);?>
             <strong>Publication list:</strong>
@@ -60,6 +65,8 @@ $document->addStyleSheet(Uri::root() . 'media/com_profiles/css/front.css');?>
 								<?php $i++; ?>
             <?php endforeach;?>
           </div>
+					<?php endif; ?>
+					<?php if(!empty($profile->external_profiles)):  ?>
 					<div class="profiles__profile-item">
             <strong>External profiles:</strong>
 						<?php $i = 0; $len = count($profile->external_profiles);?>
@@ -71,6 +78,7 @@ $document->addStyleSheet(Uri::root() . 'media/com_profiles/css/front.css');?>
 								<?php $i++; ?>
             <?php endforeach;?>
           </div>
+					<?php endif; ?>
         </div>
       </div>
       <?php echo '{/sliders}' ?>
@@ -81,7 +89,6 @@ $document->addStyleSheet(Uri::root() . 'media/com_profiles/css/front.css');?>
 <div class="profiles__pagination">
 <?php echo $this->pagination->getPagesLinks(); ?>
 </div>
-
 
 	<input type="hidden" name="task" value=""/>
 	<input type="hidden" name="boxchecked" value="0"/>
