@@ -2,7 +2,7 @@
 	<update>
 		<name>Profiles</name>
 		<description>Profiles extension update</description>
-		<element>com_studies</element>
+		<element>com_profiles</element>
 		<type>component</type>
 		<version>1.0.1</version>
 		<client>administrator</client>

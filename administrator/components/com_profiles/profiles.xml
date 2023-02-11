@@ -77,7 +77,7 @@
 		</schemas> 
 		</update>
 		 <updateservers>
-			<server type="extension" priority="1" name="Study programs">https://plycneris.com/updates/joomla/com_profiles/updates.xml</server>
+			<server type="extension" priority="1" name="Profiles">https://plycneris.com/updates/joomla/com_profiles/updates.xml</server>
 		</updateservers>
     <config>
         <fields name="params">
