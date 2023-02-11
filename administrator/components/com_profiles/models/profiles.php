@@ -26,23 +26,23 @@ class ProfilesModelProfiles extends \Joomla\CMS\MVC\Model\ListModel
  * @see        JController
  * @since      1.6
  */
-    public function __construct($config = array())
+    public function __construct(array $config = [])
     {
-        if (empty($config['filter_fields'])) {
-            $config['filter_fields'] = array(
-                'id', 'a.id',
-                'state', 'a.state',
-                'ordering', 'a.ordering',
-                'created_by', 'a.created_by',
-                'modified_by', 'a.modified_by',
-                'name', 'a.name',
-                'degree', 'a.degree',
-                'positions', 'a.positions',
-                'e_mail', 'a.e_mail',
-                'publication_list', 'a.publication_list',
-                'external_profiles', 'a.external_profiles',
-            );
-        }
+        $filterFields = [
+            'id', 'a.id',
+            'state', 'a.state',
+            'ordering', 'a.ordering',
+            'created_by', 'a.created_by',
+            'modified_by', 'a.modified_by',
+            'name', 'a.name',
+            'degree', 'a.degree',
+            'positions', 'a.positions',
+            'e_mail', 'a.e_mail',
+            'publication_list', 'a.publication_list',
+            'external_profiles', 'a.external_profiles',
+        ];
+
+        $config['filter_fields'] = $config['filter_fields'] ?? $filterFields;
 
         parent::__construct($config);
     }
@@ -111,42 +111,23 @@ class ProfilesModelProfiles extends \Joomla\CMS\MVC\Model\ListModel
      */
     protected function getListQuery()
     {
-        // Create a new query object.
         $db = $this->getDbo();
         $query = $db->getQuery(true);
-
-        // Select the required fields from the table.
-        $query->select(
-            $this->getState(
-                'list.select', 'DISTINCT a.*'
-            )
-        );
+        $query->select($this->getState('list.select', 'DISTINCT a.*'));
         $query->from('`#__profiles_list` AS a');
-
-        // Join over the users for the checked out user
         $query->select("uc.name AS uEditor");
         $query->join("LEFT", "#__users AS uc ON uc.id=a.checked_out");
-
-        // Join over the user field 'created_by'
         $query->select('`created_by`.name AS `created_by`');
         $query->join('LEFT', '#__users AS `created_by` ON `created_by`.id = a.`created_by`');
-
-        // Join over the user field 'modified_by'
         $query->select('`modified_by`.name AS `modified_by`');
         $query->join('LEFT', '#__users AS `modified_by` ON `modified_by`.id = a.`modified_by`');
-
-        // Filter by published state
         $published = $this->getState('filter.state');
-
         if (is_numeric($published)) {
             $query->where('a.state = ' . (int) $published);
         } elseif (empty($published)) {
             $query->where('(a.state IN (0, 1))');
         }
-
-        // Filter by search in title
         $search = $this->getState('filter.search');
-
         if (!empty($search)) {
             if (stripos($search, 'id:') === 0) {
                 $query->where('a.id = ' . (int) substr($search, 3));
@@ -155,15 +136,11 @@ class ProfilesModelProfiles extends \Joomla\CMS\MVC\Model\ListModel
                 $query->where('( a.name LIKE ' . $search . ' )');
             }
         }
-
-        // Add the list ordering clause.
         $orderCol = $this->state->get('list.ordering', 'name');
         $orderDirn = $this->state->get('list.direction', 'ASC');
-
         if ($orderCol && $orderDirn) {
             $query->order($db->escape($orderCol . ' ' . $orderDirn));
         }
-
         return $query;
     }
 

@@ -133,14 +133,14 @@ class ProfilesHelper
      *
      * @return array  Data results
      */
-    public function getRows(array $select, $table)
+    public function getRows(array $select, string $table)
     {
         $query = $this->db->getQuery(true)
             ->select($this->db->quoteName($select))
             ->from($this->db->quoteName($table));
         $this->db->setQuery($query);
-        $this->db->execute();
-        return $this->db->loadObjectList();
+        $rows = $this->db->loadObjectList();
+        return $rows;
     }
 
     /**
@@ -148,19 +148,18 @@ class ProfilesHelper
      * Encodes an array of positions into a JSON string.
      *
      * @param array $positions The array of positions to be encoded.
+     *
      * @return string The JSON encoded string representation of the positions.
      */
     public function positionsEncode(array $positions)
     {
-        $count = 0;
-        $positions_data = array();
-        foreach ($positions as $position) {
+        $positions_data = [];
+        foreach ($positions as $index => $position) {
             if (!empty($position)) {
-                $positions_data["positions$count"] = (object) [
+                $positions_data["positions$index"] = (object) [
                     "position" => (string) $position,
                 ];
             }
-            $count++;
         }
         return json_encode($positions_data);
     }
@@ -169,20 +168,19 @@ class ProfilesHelper
      * Encode an array of external profiles into a JSON string.
      *
      * @param array $profiles The array of external profiles to encode.
+     *
      * @return string The encoded JSON string.
      */
     public function externalProfilesEncode(array $profiles)
     {
-        $count = 0;
-        $profiles_data = array();
-        foreach ($profiles as $profile) {
+        $profiles_data = [];
+        foreach ($profiles as $index => $profile) {
             if (!empty($profile)) {
-                $profiles_data["external_profiles$count"] = (object) [
+                $profiles_data["external_profiles$index"] = (object) [
                     "profile" => $this->getUrlHost($profile),
                     "profile_url" => (string) $profile,
                 ];
             }
-            $count++;
         }
         return json_encode($profiles_data);
     }
@@ -192,43 +190,41 @@ class ProfilesHelper
      * Encodes an array of publication objects into a JSON string.
      *
      * @param array $publications Array of publication objects
+     *
      * @return string JSON string of encoded publication objects
      */
     public function publicationsEncode($publications)
     {
-        $count = 0;
-        $publication_data = array();
-        foreach ($publications as $publication) {
-
-            $publication_data["publication_list$count"] = (object) [
+        $publicationData = [];
+        foreach ($publications as $index => $publication) {
+            $publicationData["publication_list$index"] = (object) [
                 "publication" => $publication->publication,
                 "publication_url" => $publication->publication_url,
             ];
-
-            $count++;
         }
-        return json_encode($publication_data);
+
+        return json_encode($publicationData);
     }
 
     /**
-     *Insert data into the database.
-
-     *@param array $columns An array of column names to be inserted
-     *@param array $val An array of values to be inserted
-     *@param string $table The name of the table to insert the data into
-     *@return void
+     * Insert data into the database.
+     *
+     * @param array $columns An array of column names to be inserted
+     * @param array $val An array of values to be inserted
+     * @param string $table The name of the table to insert the data into
+     *
+     * @return void
      */
-    public function insert(array $columns, array $val, $table)
+    public function insert(array $columns, array $values, string $table)
     {
-        $values = array();
         $query = $this->db->getQuery(true);
-        foreach ($val as $value) {
-            $values[] = $this->db->quote($value);
-        }
+        $quotedValues = array_map(function ($value) {
+            return $this->db->quote($value);
+        }, $values);
 
         $query->insert($this->db->quoteName($table))
             ->columns($this->db->quoteName($columns))
-            ->values(implode(',', $values));
+            ->values(implode(',', $quotedValues));
         $this->db->setQuery($query);
         $this->db->execute();
     }

@@ -49,22 +49,21 @@ class ProfilesTableprofile extends Table
      */
     public function bind($array, $ignore = '')
     {
-        $date = Factory::getDate();
-        $task = Factory::getApplication()->input->get('task');
-
+        $date = JFactory::getDate();
         $input = JFactory::getApplication()->input;
         $task = $input->getString('task', '');
+        $user = JFactory::getUser();
 
         if ($array['id'] == 0 && empty($array['created_by'])) {
-            $array['created_by'] = JFactory::getUser()->id;
+            $array['created_by'] = $user->id;
         }
 
         if ($array['id'] == 0 && empty($array['modified_by'])) {
-            $array['modified_by'] = JFactory::getUser()->id;
+            $array['modified_by'] = $user->id;
         }
 
         if ($task == 'apply' || $task == 'save') {
-            $array['modified_by'] = JFactory::getUser()->id;
+            $array['modified_by'] = $user->id;
         }
 
         if (isset($array['params']) && is_array($array['params'])) {
@@ -79,7 +78,7 @@ class ProfilesTableprofile extends Table
             $array['metadata'] = (string) $registry;
         }
 
-        if (!Factory::getUser()->authorise('core.admin', 'com_profiles.profile.' . $array['id'])) {
+        if (!$user->authorise('core.admin', 'com_profiles.profile.' . $array['id'])) {
             $actions = Access::getActionsFromFile(
                 JPATH_ADMINISTRATOR . '/components/com_profiles/access.xml',
                 "/access/section[@name='profile']/"
@@ -96,11 +95,9 @@ class ProfilesTableprofile extends Table
             $array['rules'] = $this->JAccessRulestoArray($array_jaccess);
         }
 
-        // Bind the rules for ACL where supported.
         if (isset($array['rules']) && is_array($array['rules'])) {
             $this->setRules($array['rules']);
         }
-
         return parent::bind($array, $ignore);
     }
 

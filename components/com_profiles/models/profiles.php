@@ -29,27 +29,26 @@ class ProfilesModelProfiles extends \Joomla\CMS\MVC\Model\ListModel
      * @see        JController
      * @since      1.6
      */
-    public function __construct($config = array())
+    public function __construct(array $config = [])
     {
-        if (empty($config['filter_fields'])) {
-            $config['filter_fields'] = array(
-                'id', 'a.id',
-                'state', 'a.state',
-                'ordering', 'a.ordering',
-                'created_by', 'a.created_by',
-                'modified_by', 'a.modified_by',
-                'name', 'a.name',
-                'degree', 'a.degree',
-                'positions', 'a.positions',
-                'e_mail', 'a.e_mail',
-                'publication_list', 'a.publication_list',
-                'external_profiles', 'a.external_profiles',
-            );
-        }
+        $defaultFilterFields = [
+            'id', 'a.id',
+            'state', 'a.state',
+            'ordering', 'a.ordering',
+            'created_by', 'a.created_by',
+            'modified_by', 'a.modified_by',
+            'name', 'a.name',
+            'degree', 'a.degree',
+            'positions', 'a.positions',
+            'e_mail', 'a.e_mail',
+            'publication_list', 'a.publication_list',
+            'external_profiles', 'a.external_profiles',
+        ];
+
+        $config['filter_fields'] = $config['filter_fields'] ?? $defaultFilterFields;
 
         parent::__construct($config);
     }
-
     /**
      * Method to auto-populate the model state.
      *
@@ -72,6 +71,7 @@ class ProfilesModelProfiles extends \Joomla\CMS\MVC\Model\ListModel
 
         $ordering = isset($list['filter_order']) ? $list['filter_order'] : null;
         $direction = isset($list['filter_order_Dir']) ? $list['filter_order_Dir'] : null;
+
         if (empty($ordering)) {
             $ordering = $app->getUserStateFromRequest($this->context . '.filter_order', 'filter_order', $app->get('filter_order'));
             if (!in_array($ordering, $this->filter_fields)) {
@@ -81,7 +81,7 @@ class ProfilesModelProfiles extends \Joomla\CMS\MVC\Model\ListModel
         }
         if (empty($direction)) {
             $direction = $app->getUserStateFromRequest($this->context . '.filter_order_Dir', 'filter_order_Dir', $app->get('filter_order_Dir'));
-            if (!in_array(strtoupper($direction), array('ASC', 'DESC'))) {
+            if (!in_array(strtoupper($direction), ['ASC', 'DESC'])) {
                 $direction = 'ASC';
             }
             $this->setState('list.direction', $direction);
@@ -95,20 +95,16 @@ class ProfilesModelProfiles extends \Joomla\CMS\MVC\Model\ListModel
         $app->setUserState($this->context . '.list', $list);
         $app->input->set('list', null);
 
-        // List state information.
-
         parent::populateState($ordering, $direction);
 
-        $context = $this->getUserStateFromRequest($this->context . '.filter.search', 'filter_search');
-        $this->setState('filter.search', $context);
+        $searchContext = $app->getUserStateFromRequest($this->context . '.filter.search', 'filter_search');
+        $this->setState('filter.search', $searchContext);
 
-        // Load the parameters.
         $params = $app->getParams();
         $this->setState('params', $params);
 
-        // Split context into component and optional section
-        if (!empty($context)) {
-            $parts = FieldsHelper::extract($context);
+        if (!empty($searchContext)) {
+            $parts = FieldsHelper::extract($searchContext);
 
             if ($parts) {
                 $this->setState('filter.component', $parts[0]);
@@ -126,48 +122,31 @@ class ProfilesModelProfiles extends \Joomla\CMS\MVC\Model\ListModel
      */
     protected function getListQuery()
     {
-        // Create a new query object.
         $db = $this->getDbo();
         $query = $db->getQuery(true);
-
-        // Select the required fields from the table.
-        $query->select(
-            $this->getState(
-                'list.select', 'DISTINCT a.*'
-            )
-        );
-
-        $query->from('`#__profiles_list` AS a');
-
-        // Join over the users for the checked out user.
-        $query->select('uc.name AS uEditor');
-        $query->join('LEFT', '#__users AS uc ON uc.id=a.checked_out');
-
-        // Join over the created by field 'created_by'
-        $query->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by');
-
-        // Join over the created by field 'modified_by'
-        $query->join('LEFT', '#__users AS modified_by ON modified_by.id = a.modified_by');
+        $query->select($this->getState('list.select', 'DISTINCT a.*'));
+        $query->from('#__profiles_list AS a');
+        $query->select('uc.name AS uEditor')
+            ->join('LEFT', '#__users AS uc ON uc.id = a.checked_out')
+            ->join('LEFT', '#__users AS created_by ON created_by.id = a.created_by')
+            ->join('LEFT', '#__users AS modified_by ON modified_by.id = a.modified_by');
 
         if (!Factory::getUser()->authorise('core.edit', 'com_profiles')) {
             $query->where('a.state = 1');
         } else {
-            $query->where('(a.state IN (0, 1))');
+            $query->where('a.state IN (0, 1)');
         }
 
-        // Filter by search in title
         $search = $this->getState('filter.search');
-
         if (!empty($search)) {
             if (stripos($search, 'id:') === 0) {
                 $query->where('a.id = ' . (int) substr($search, 3));
             } else {
-                $search = $db->Quote('%' . $db->escape($search, true) . '%');
-                $query->where('( a.name LIKE ' . $search . ' )');
+                $search = $db->quote('%' . $db->escape($search, true) . '%');
+                $query->where('a.name LIKE ' . $search);
             }
         }
 
-        // Add the list ordering clause.
         $orderCol = $this->state->get('list.ordering', 'name');
         $orderDirn = $this->state->get('list.direction', 'ASC');
 
@@ -177,7 +156,6 @@ class ProfilesModelProfiles extends \Joomla\CMS\MVC\Model\ListModel
 
         return $query;
     }
-
     /**
      * Method to get an array of data items
      *
