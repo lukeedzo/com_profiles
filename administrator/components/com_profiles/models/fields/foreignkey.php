@@ -5,7 +5,6 @@
  * @package    Com_Profiles
  * @author     Lukas Plycneris <lukasplycneris@protonmail.com>
  * @copyright  2023 Lukas Plycneris
- * @license    GNU General Public License version 2 or later; see LICENSE.txt
  */
 defined('JPATH_BASE') or die;
 
