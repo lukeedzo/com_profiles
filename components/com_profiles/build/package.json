@@ -1,6 +1,6 @@
 {
-	"name": "com-studies-build-tools",
-	"description": "com_studies build tools",
+	"name": "com-profiles-build-tools",
+	"description": "com_profiles build tools",
 	"version": "1.0.0",
 	"author": "Lukas Plycneris",
 	"main": "index.js",
