@@ -128,6 +128,7 @@ class ProfilesHelper
      * Method retuerns all existing rows in the database.
      *
      * @param array   $select Select fields.
+     *
      * @param string  $table  Database table name.
      *
      * @return array  Data results
