@@ -179,6 +179,13 @@ class ProfilesHelpersProfiles
         return $items;
     }
 
+    /**
+     * Adds a `<strong>` tag to the last word of a string
+     *
+     * @param string $string The input string
+     *
+     * @return string The input string with the last word surrounded by `<strong>` tags
+     */
     public function lastStrong($string)
     {
         $last_word = strrchr($string, ' ');
@@ -186,6 +193,13 @@ class ProfilesHelpersProfiles
         return str_replace($last_word, $bold_last_word, $string);
     }
 
+    /**
+     * Adds a `<strong>` tag to the first word of a string
+     *
+     * @param string $string The input string, separated by commas
+     *
+     * @return string The input string with the first word surrounded by `<strong>` tags
+     */
     public function strongFirst($string)
     {
         $items = explode(",", $string);
