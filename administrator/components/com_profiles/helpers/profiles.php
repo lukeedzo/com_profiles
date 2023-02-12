@@ -103,6 +103,7 @@ class ProfilesHelper
      * Extracts the host from a URL.
 
      * @param string $url The URL to extract the host from.
+     *
      * @return string The host extracted from the URL.
      */
     public function getUrlHost($url)
@@ -117,6 +118,7 @@ class ProfilesHelper
      * Removes tabs from a string.
      *
      * @param string $string The string from which to remove tabs.
+     *
      * @return string The cleaned string.
      */
     public function removeStingTabs($string)
@@ -210,7 +212,9 @@ class ProfilesHelper
      * Insert data into the database.
      *
      * @param array $columns An array of column names to be inserted
+     *
      * @param array $val An array of values to be inserted
+     *
      * @param string $table The name of the table to insert the data into
      *
      * @return void
