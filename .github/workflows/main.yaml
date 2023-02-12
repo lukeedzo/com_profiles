@@ -3,8 +3,29 @@ on:
    branches:
       - '*'
       - '!dev'
-name: 🚀 Build and deploy joomla component
+name: 🚀 Build, deploy and linting joomla component
 jobs:
+  lint:
+    name: Lint PHP Files
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Setup PHP
+      uses: actions/setup-php@v2
+      with:
+        php-version: 7.4
+
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y php7.4-xml
+
+    - name: Lint PHP files
+      run: |
+        find . -name "*.php" -not -path "./vendor/*" | xargs -L1 -P4 php -l
   web-deploy:
     name: 🎉 Deploy
     runs-on: ubuntu-latest
