@@ -26,6 +26,10 @@ The profiles can be displayed in any desired location on the website, providing 
 
 In addition to its user-friendly design, the component is also highly functional. It provides a range of features, including the ability to group profiles by letter, display the scientist's name, degree, positions, email, publication list, and external profiles. The component also makes it easy to search for profiles, making it easy for users to find the information they need.
 
+<hr>
+This Joomla component can also serve as a starting point for your own custom components. Instead of starting from scratch, you can use the code and structure of the sample component as a foundation, making it easier and faster to build your own custom components.
+<hr>
+
 <!-- INSTALLATION -->
 ## Installation
 
@@ -45,3 +49,4 @@ Compiled files
 ```
 cd src/
 ```
+
