@@ -25,3 +25,23 @@ The component is designed to be user-friendly and easy to use. It allows users t
 The profiles can be displayed in any desired location on the website, providing a convenient way to showcase the profiles of scientists, researchers, or any other professionals. The component also provides a range of customization options, allowing users to customize the look and feel of the profiles to match their website.
 
 In addition to its user-friendly design, the component is also highly functional. It provides a range of features, including the ability to group profiles by letter, display the scientist's name, degree, positions, email, publication list, and external profiles. The component also makes it easy to search for profiles, making it easy for users to find the information they need.
+
+<!-- INSTALLATION -->
+## Installation
+
+1. Download the latest version - [com_profiles-1.0.2.zip](https://plycneris.com/updates/joomla/com_profiles/com_profiles-1.0.2.zip)
+
+2. Install the componenet in your local Joomla environment
+
+
+## Sass and js compilation
+
+```
+cd components/com_profiles/build/
+npm install 
+npm run dev
+```
+Compiled files
+```
+cd src/
+```
