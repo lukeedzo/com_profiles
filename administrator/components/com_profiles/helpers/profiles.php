@@ -209,6 +209,30 @@ class ProfilesHelper
     }
 
     /**
+     * Update a single field in the database table
+     *
+     * @param string $field The name of the field to be updated
+     *
+     * @param mixed $value The new value for the field
+     *
+     * @param string $table The name of the database table
+     *
+     * @param int $id The ID of the row to be updated
+     *
+     * @return bool True on success, false on failure
+     */
+    public function update($field, $value, $table, $id)
+    {
+        $db = JFactory::getDbo();
+        $query = $db->getQuery(true)
+            ->update($db->quoteName($table))
+            ->set($db->quoteName($field) . ' = ' . $db->quote($value))
+            ->where($db->quoteName('id') . ' = ' . (int) $id);
+        $db->setQuery($query);
+        return $db->execute();
+    }
+
+    /**
      * Insert data into the database.
      *
      * @param array $columns An array of column names to be inserted
