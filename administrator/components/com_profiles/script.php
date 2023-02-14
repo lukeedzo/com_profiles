@@ -21,7 +21,7 @@ use \Joomla\CMS\Language\Text;
  * @version  Release: 0.2b
  * @since    0.1b
  */
-class com_studiesInstallerScript
+class com_profilesInstallerScript
 {
     /**
      * Method called before install/update the component. Note: This method won't be called during uninstall process.
