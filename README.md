@@ -33,7 +33,7 @@ This Joomla component can also serve as a starting point for your own custom com
 <!-- INSTALLATION -->
 ## Installation
 
-1. Download the latest version - [com_profiles-1.0.2.zip](https://plycneris.com/updates/joomla/com_profiles/com_profiles-1.0.2.zip)
+1. Download the latest version - [com_profiles-1.0.3.zip](https://plycneris.com/updates/joomla/com_profiles/com_profiles-1.0.3.zip)
 
 2. Install the componenet in your local Joomla environment
 
