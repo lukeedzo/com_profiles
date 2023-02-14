@@ -66,8 +66,8 @@ class com_profilesInstallerScript
     public function install($parent)
     {
         $this->installDb($parent);
-        $this->installPlugins($parent);
-        $this->installModules($parent);
+        // $this->installPlugins($parent);
+        // $this->installModules($parent);
     }
 
     /**
@@ -806,8 +806,8 @@ class com_profilesInstallerScript
     public function update($parent)
     {
         $this->installDb($parent);
-        $this->installPlugins($parent);
-        $this->installModules($parent);
+        // $this->installPlugins($parent);
+        // $this->installModules($parent);
     }
 
     /**
@@ -819,8 +819,8 @@ class com_profilesInstallerScript
      */
     public function uninstall($parent)
     {
-        $this->uninstallPlugins($parent);
-        $this->uninstallModules($parent);
+        // $this->uninstallPlugins($parent);
+        // $this->uninstallModules($parent);
     }
 
     /**
