@@ -34,7 +34,7 @@ $document->addStyleSheet(Uri::root() . 'media/com_profiles/css/front.css');?>
   <?php foreach ($this->items as $item): ?>
     <h4 class="profiles__letter"><?php echo $item['letter'] ?></h4>
     <?php foreach ($item['items'] as $profile): ?>
-      <?php echo '{slider open="false" title="' . $this->helper->lastStrong($profile->name) . ', ' . $profile->degree . '"}'; ?>
+      <?php echo '{slider open="false" title="' . $this->helper->strongFirst($profile->name) . ', ' . $profile->degree . '"}'; ?>
 			<?php if(!empty($profile->positions)): ?>
 			<div class="profiles__positions">
         <?php foreach ($profile->positions as $position): ?>

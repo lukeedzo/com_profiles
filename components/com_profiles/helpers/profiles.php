@@ -202,14 +202,8 @@ class ProfilesHelpersProfiles
      */
     public function strongFirst($string)
     {
-        $items = explode(",", $string);
-        $bolded_items = array();
-        $bolded_items[] = "<strong>" . trim($items[0]) . "</strong>";
-        for ($i = 1; $i < count($items); $i++) {
-            $bolded_items[] = trim($items[$i]);
-        }
-
-        return implode(", ", $bolded_items);
+      $words = explode(" ", $string);
+			$words[0] = "<strong>" . $words[0] . "</strong>";
+        return  implode(" ", $words);
     }
-
 }

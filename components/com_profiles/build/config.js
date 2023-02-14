@@ -1,6 +1,6 @@
 module.exports = {
   // compoenent version
-  version: '1.0.2',
+  version: '1.0.3',
 
   // css files paths
   css: {
