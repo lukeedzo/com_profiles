@@ -81,7 +81,7 @@ class Importer
                     'external_profiles',
                     'state',
                 ], [
-                    $profile->name . ' ' . $profile->surname,
+                    $profile->surname. ' ' . $profile->name,
                     $profile->degree,
                     $profile->e_mail,
                     $helper->positionsEncode([

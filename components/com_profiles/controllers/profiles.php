@@ -46,7 +46,7 @@ class ProfilesControllerProfiles extends ProfilesController
                 'name' => $item['name'],
                 'e_mail' => $item['e_mail'],
                 'degree' => $item['degree'],
-                'letter' => mb_substr($item['name'], 0, 1),
+                'letter' => substr($item['name'], 0, 1),
                 'positions' => $helper->decodePositions($item['positions']),
                 'publication_list' => $helper->decodePublications($item['publication_list']),
                 'external_profiles' => $helper->decodeProfiles($item['external_profiles']),
