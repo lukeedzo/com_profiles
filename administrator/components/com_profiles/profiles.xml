@@ -7,7 +7,7 @@
     <author>Lukas Plycneris</author>
     <authorEmail>lukasplycneris@protonmail.com</authorEmail>
     <authorUrl>https://plycneris.com/</authorUrl>
-    <version>1.0.3</version>
+    <version>1.0.4</version>
     <description>COM_PROFILES_XML_DESCRIPTION</description>
 		<scriptfile>script.php</scriptfile>
     <install> <!-- Runs on install -->
