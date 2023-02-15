@@ -202,8 +202,29 @@ class ProfilesHelpersProfiles
      */
     public function strongFirst($string)
     {
-      $words = explode(" ", $string);
-			$words[0] = "<strong>" . $words[0] . "</strong>";
-        return  implode(" ", $words);
+        $words = explode(" ", $string);
+        $words[0] = "<strong>" . $words[0] . "</strong>";
+        return implode(" ", $words);
+    }
+
+    /**
+     * Adds bold tags around all the words before the first comma in a string.
+     *
+     * @param string $string The input string to modify.
+     *
+     * @return string The modified string with bold tags added.
+     */
+    public function boldWordsBeforeComma($string)
+    {
+        $pos = strpos($string, ",");
+        $words_before_comma = substr($string, 0, $pos);
+        $words_array = explode(" ", $words_before_comma);
+        $bold_words_array = array_map(function ($word) {
+            return "<strong>$word</strong>";
+        }, $words_array);
+
+        $bold_string = implode(" ", $bold_words_array) . substr($string, $pos);
+
+        return $bold_string;
     }
 }

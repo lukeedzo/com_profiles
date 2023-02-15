@@ -34,50 +34,52 @@ $document->addStyleSheet(Uri::root() . 'media/com_profiles/css/front.css');?>
   <?php foreach ($this->items as $item): ?>
     <h4 class="profiles__letter"><?php echo $item['letter'] ?></h4>
     <?php foreach ($item['items'] as $profile): ?>
-      <?php echo '{slider open="false" title="' . $this->helper->strongFirst($profile->name) . ', ' . $profile->degree . '"}'; ?>
-			<?php if(!empty($profile->positions)): ?>
+      <?php echo '{slider show_pagination="1" open="false" title="' . $this->helper->strongFirst($profile->name) . ', ' . $profile->degree . '"}'; ?>
+			<?php if (!empty($profile->positions)): ?>
 			<div class="profiles__positions">
         <?php foreach ($profile->positions as $position): ?>
           <div class="profiles__position">
-            <?php echo $this->helper->strongFirst($position->position) ?>
+            <?php echo $this->helper->boldWordsBeforeComma($position->position) ?>
           </div>
         <?php endforeach;?>
         <hr>
       </div>
-			<?php endif ?>
+			<?php endif?>
       <div class="profiles__profile">
         <div class="profiles__profile-items">
-					<?php if(!empty($profile->e_mail)):  ?>
+					<?php if (!empty($profile->e_mail)): ?>
           <div class="profiles__profile-item">
             <strong>E-mail: </strong><a href="mailto: <?php echo $profile->e_mail ?>"><?php echo $profile->e_mail ?></a>
           </div>
-					<?php endif ?>
-					<?php if(!empty($profile->publication_list)):  ?>
+					<?php endif?>
+					<?php if (!empty($profile->publication_list)): ?>
           <div class="profiles__profile-item">
-					<?php $i = 0; $len = count($profile->publication_list);?>
+					<?php $i = 0;
+$len = count($profile->publication_list);?>
             <strong>Publication list:</strong>
             <?php foreach ($profile->publication_list as $publication): ?>
               <a href="<?php echo $publication->publication_url ?>"><?php echo $publication->publication ?></a>
-							<?php if($i !== $len - 1): ?>
-									<?php echo '/'?>
-								<?php endif; ?>
-								<?php $i++; ?>
+							<?php if ($i !== $len - 1): ?>
+									<?php echo '/' ?>
+								<?php endif;?>
+								<?php $i++;?>
             <?php endforeach;?>
           </div>
-					<?php endif; ?>
-					<?php if(!empty($profile->external_profiles)):  ?>
+					<?php endif;?>
+					<?php if (!empty($profile->external_profiles)): ?>
 					<div class="profiles__profile-item">
             <strong>External profiles:</strong>
-						<?php $i = 0; $len = count($profile->external_profiles);?>
+						<?php $i = 0;
+$len = count($profile->external_profiles);?>
             <?php foreach ($profile->external_profiles as $external): ?>
-              <a href="<?php echo $external->profile_url ?>"><?php echo $external->profile?></a>
-								<?php if($i !== $len - 1): ?>
-									<?php echo '/'?>
-								<?php endif; ?>
-								<?php $i++; ?>
+              <a href="<?php echo $external->profile_url ?>"><?php echo $external->profile ?></a>
+								<?php if ($i !== $len - 1): ?>
+									<?php echo '/' ?>
+								<?php endif;?>
+								<?php $i++;?>
             <?php endforeach;?>
           </div>
-					<?php endif; ?>
+					<?php endif;?>
         </div>
       </div>
       <?php echo '{/sliders}' ?>

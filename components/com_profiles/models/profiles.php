@@ -18,7 +18,6 @@ use \Joomla\CMS\Language\Text;
  * @since  1.6
  */
 class ProfilesModelProfiles extends \Joomla\CMS\MVC\Model\ListModel
-
 {
     /**
      * Constructor.
